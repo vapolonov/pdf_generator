@@ -404,7 +404,7 @@ def generate_batch(template_path: Path, data_path: Path, indices: Sequence[int],
 
 def run_interactive(root: Path, output: Path) -> int:
     discovery = FileDiscovery(root)
-    print("=" * 44 + "\n       ГЕНЕРАТОР КАССОВЫХ ЧЕКОВ\n" + "=" * 44)
+    print("=" * 44 + "\n      ГЕНЕРАТОР ЧЕКОВ И ДОКУМЕНТОВ\n" + "=" * 44)
     while True:
         templates = discovery.templates()
         selected_template = select_file(templates, "Доступные HTML-шаблоны:")
@@ -442,14 +442,17 @@ def run_interactive(root: Path, output: Path) -> int:
                 for i, row in enumerate(data.rows, 1):
                     summary = " | ".join(f"{key}: {value}" for key, value in list(row.items())[:4])
                     print(f"[{i}] {summary}")
-                print("\nВведите номер, список (1,3), диапазон (1-5), A — все, 0 — другой CSV.")
+                print("\nВведите номер, список (1,3), диапазон (1-5), A — все, 0 — другой источник данных.")
+                selection = input("> ").strip()
+                if selection == "0":
+                    break
                 try:
-                    indices = parse_selection(input("> "), len(data.rows))
+                    indices = parse_selection(selection, len(data.rows))
                 except ReceiptError as exc:
                     print(exc)
                     continue
                 preview(data.rows, indices)
-                print("[1] Сгенерировать  [2] Выбрать записи заново  [3] Другой CSV  [4] Другой шаблон  [0] Выход")
+                print("[1] Сгенерировать  [2] Выбрать записи заново  [3] Другой источник  [4] Другой шаблон  [0] Выход")
                 action = input("> ").strip()
                 if action == "2":
                     continue

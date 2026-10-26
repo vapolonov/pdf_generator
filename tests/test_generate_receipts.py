@@ -99,6 +99,20 @@ class JsonTests(unittest.TestCase):
             self.assertEqual([good_csv], compatible)
 
 
+class InteractiveMenuTests(unittest.TestCase):
+    def test_zero_at_record_prompt_returns_to_data_sources(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+            root = Path(directory)
+            (root / "templates").mkdir()
+            (root / "data").mkdir()
+            (root / "templates" / "example.html").write_text("<p>{{id}}</p>", encoding="utf-8")
+            (root / "data" / "example.csv").write_text("id\n1\n", encoding="utf-8")
+            output = io.StringIO()
+            with patch("builtins.input", side_effect=["1", "1", "0", "0", "0"]), redirect_stdout(output):
+                self.assertEqual(0, app.run_interactive(root, root / "output"))
+            self.assertGreaterEqual(output.getvalue().count("Совместимые источники данных"), 2)
+
+
 class TemplateAndSelectionTests(unittest.TestCase):
     def test_placeholders_compatibility_substitution_and_escaping(self):
         template = "<p>{{name}}</p><p>{{amount}}</p>"
