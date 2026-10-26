@@ -1,0 +1,3 @@
+# WeasyPrint generates PDF files. Its platform-specific system dependencies
+# are described in README.md.
+weasyprint>=62

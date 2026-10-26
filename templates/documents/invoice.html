@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Счёт {{invoice_number}}</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    body { font-family: Arial, "Liberation Sans", sans-serif; color: #202124; font-size: 11pt; }
+    h1 { margin-bottom: 28px; color: #17365d; }
+    .row { display: flex; justify-content: space-between; gap: 24px; }
+    .card { border: 1px solid #b8c6d8; padding: 12px; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 20px; }
+    th, td { border: 1px solid #8796a5; padding: 9px; text-align: center; overflow-wrap: anywhere; vertical-align: top; }
+    th { background: #eaf0f6; }
+    .total { text-align: right; font-size: 16pt; font-weight: bold; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <h1>Счёт на оплату</h1>
+  <div class="row"><strong>Счёт № {{invoice_number}}</strong><span>Дата: {{date}}</span></div>
+  <div class="card"><strong>Поставщик:</strong> {{seller}}<br><strong>Покупатель:</strong> {{customer}}<br><strong>Адрес:</strong> {{customer_address}}</div>
+  <table><thead><tr><th>Наименование</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr></thead>
+    <tbody><tr><td>{{item}}</td><td>{{quantity}}</td><td>{{unit_price}} ₽</td><td>{{amount}} ₽</td></tr></tbody>
+  </table>
+  <p class="total">К оплате: {{amount}} ₽</p>
+  <p>Назначение платежа: {{payment_purpose}}</p>
+</body>
+</html>

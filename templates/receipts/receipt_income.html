@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Кассовый чек {{id}}</title>
+  <style>
+    @page { size: A5; margin: 14mm; }
+    body { font-family: "Arial", "Liberation Sans", sans-serif; color: #202124; }
+    h1 { text-align: center; font-size: 20pt; }
+    .meta { margin: 0 auto 18px; width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .meta th, .meta td { border: 1px solid #555; padding: 7px; text-align: center; vertical-align: middle; overflow-wrap: anywhere; word-wrap: break-word; white-space: normal; }
+    .total { text-align: right; font-size: 16pt; font-weight: bold; }
+    .note { color: #555; font-size: 9pt; }
+  </style>
+</head>
+<body>
+  <h1>Кассовый чек</h1>
+  <table class="meta">
+    <tr><th>Номер</th><th>Операция</th><th>Дата</th></tr>
+    <tr><td>{{id}}</td><td>{{receipt_type}}</td><td>{{date}}</td></tr>
+  </table>
+  <p class="total">Итого: {{amount}} ₽</p>
+  <p>Описание: {{description}}</p>
+  <p class="note">Демонстрационный шаблон. Используйте только для тестовых данных.</p>
+</body>
+</html>

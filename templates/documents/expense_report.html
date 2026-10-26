@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Авансовый отчёт {{report_number}}</title>
+  <style>
+    @page { size: A4; margin: 17mm; }
+    body { font-family: Arial, "Liberation Sans", sans-serif; color: #222; }
+    h1 { text-align: center; }
+    .details { width: 100%; border-collapse: collapse; margin: 24px 0; table-layout: fixed; }
+    .details td { border: 1px solid #666; padding: 8px; overflow-wrap: anywhere; }
+    .details td:first-child { width: 34%; background: #f2f4f6; }
+    .amount { font-size: 16pt; font-weight: bold; text-align: right; }
+    .footer { margin-top: 50px; }
+  </style>
+</head>
+<body>
+  <h1>Авансовый отчёт</h1>
+  <table class="details">
+    <tr><td>Номер отчёта</td><td>{{report_number}}</td></tr>
+    <tr><td>Дата</td><td>{{date}}</td></tr>
+    <tr><td>Сотрудник</td><td>{{employee}}</td></tr>
+    <tr><td>Подразделение</td><td>{{department}}</td></tr>
+    <tr><td>Цель расходов</td><td>{{purpose}}</td></tr>
+    <tr><td>Документы-основания</td><td>{{supporting_documents}}</td></tr>
+  </table>
+  <p class="amount">Итого: {{amount}} ₽</p>
+  <p>Комментарий: {{comment}}</p>
+  <p class="footer">Подпись сотрудника: __________________</p>
+</body>
+</html>
